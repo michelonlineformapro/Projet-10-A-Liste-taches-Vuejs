@@ -1,0 +1,39 @@
+html, body{
+  background-color: #F2EBC9;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 1.2rem;
+  color: #3C5973;
+}
+
+.text-info{
+  color: #8C493A!important;
+}
+
+.bg-warning{
+  background-color: #223A59!important;
+}
+
+.btn-danger{
+  background-color: #D95448!important;
+  color: #3C5973!important;
+  border: none!important;
+}
+
+.btn-danger:hover{
+  background-color: #cf8780!important;
+  color: white!important;
+  border: none!important;
+}
+
+/*Liste des taches*/
+#liste-taches{
+
+}
+
+.liste-titre{
+  background-color: #D95448;
+}
+
+

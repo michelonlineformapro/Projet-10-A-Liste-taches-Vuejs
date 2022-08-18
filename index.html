@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="public/css/styles.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  </head>
+  <body>
+
+    <!--LA NAVBAR-->
+    <header>
+      <nav>
+        <router-link to="/">LISTE TACHES</router-link>
+        <router-linl to="/crud">CRUD VUEJS</router-linl>
+      </nav>
+      <router-view></router-view>
+    </header>
+
+    <!--LISTE TACHES-->
+    <div class="container" id="liste-taches">
+      <div class="text-center">
+        <h1 class="liste-titre shadow p-3 mt-3 rounded">Liste taches Vuejs 2</h1>
+      </div>
+
+      <span class="d-flex justify-content-between">
+        <div>{{ message }}</div>
+        <button @Click.prevent="supprimerTous" class="btn btn-danger">Tous supprimer</button>
+      </span>
+      
+
+      <ul class="list-group">
+        <li class="list-group-item m-2 text-info animate__animated animate__slideInLeft" v-for="(tache, index) in taches" :key="tache.item">
+          <span class="d-flex justify-content-between">       
+            {{ tache.item }}
+            <button @click.prevent="supprimerTache(tache)" class="btn btn-danger" type="button">X</button>
+          </span>
+          
+        </li>
+      </ul>
+
+      <form class="container p-3 mt-3 shadow">
+        <label for="input-tache" class="container rounded text-danger bg-warning p-2 mt-3">Ajouter votre tache !</label>
+        <p>Vous avez entrer : {{ messageInput }}</p>
+        <input id="input-tache" v-model="messageInput" class="form-control mt-2" type="text" placeholder="Exemple : apprende vuejs" />
+        <button @click.prevent="ajouterTache" type="submit" class="btn btn-danger mt-3">Ajouter la tache</button>
+      </form>
+   
+    </div>
+
+ 
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+
+    <script>
+    let date = new Date();
+    console.log(date);
+      //Insatnce du framework Vuejs
+      let app = new Vue({
+        //On greffe l'instance a l'id de html
+        el: '#liste-taches',
+        data:{
+          message: "Votre liste de tache le : " + date.toLocaleString(),
+          messageInput: '', 
+  
+          taches:[
+            {
+              id:1,
+              item: 'Apprendre vuejs',
+            },
+            {
+              id:2,
+              item: 'Coder du javascript'
+            }
+          ],
+        
+        },
+        methods:{
+          ajouterTache(){
+               
+            //alert(this.messageInput)
+            //console.log(this.message)
+            //console.log(this.messageInput)
+            //console.log(this.taches)
+            //le tableau de taches + son objet clé + valeur soit item = v-model de l'input
+            this.taches.push({
+              'item': this.messageInput
+            });
+            this.messageInput = ""
+          },
+          supprimerTache(tache){
+            //console.log('ok')
+            this.taches = this.taches.filter(t => t !== tache)    
+          },
+          supprimerTous(){
+            console.log("test")
+            this.taches = []
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
